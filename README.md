@@ -9,8 +9,8 @@ Bu repoda bulunan scriptleri `chmod +x k8s-install.sh` ile çalıştırılabilir
 
 Eğer aşağıdaki hatayı alırsanız:
 
-couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
-The connection to the server localhost:8080 was refused - did you specify the right host or port?
+![image](https://github.com/user-attachments/assets/bd853e75-5e9c-4c34-9a20-e9c18edeb803)
+
 
 
 ### Bu Hata Ne Anlama Geliyor?
@@ -24,16 +24,15 @@ Bu yüzden varsayılan olarak `localhost:8080` adresine gitmeye çalışıyor ve
 ## Çözüm
 
 Master node’da aşağıdaki komutları çalıştırarak `admin.conf` dosyasını kullanıcı dizinine kopyalayıp, izinleri ayarlayın:
+
 Ardından tekrar deneyin:
 kubectl get nodes
-![image](https://github.com/user-attachments/assets/34a31098-286c-47c7-9e10-1ddcdca3673f)
+
+
+![image](https://github.com/user-attachments/assets/c8cb44fa-5b3c-4e7a-85f0-350d3f4a66fc)
 
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
-
-```bash
-
-
 
