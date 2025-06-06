@@ -1,2 +1,37 @@
 # kubeadm-install
-Bu repoda bulunan scriptleri chmod +x k8s-install.sh sudo ./k8s-install.sh ile çalıştırarak kubeadm kurulumu yapabilirsiniz
+
+Bu repoda bulunan scriptleri `chmod +x k8s-install.sh` ile çalıştırılabilir hale getirip,  
+`sudo ./k8s-install.sh` komutuyla kubeadm kurulumu yapabilirsiniz.
+
+---
+
+## Worker Node'da Alınan Hata
+
+Eğer aşağıdaki hatayı alırsanız:
+
+couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
+The connection to the server localhost:8080 was refused - did you specify the right host or port?
+
+yaml
+Copy
+Edit
+
+### Bu Hata Ne Anlama Geliyor?
+
+`kubectl` komutu API server’a bağlanmaya çalışıyor ama bulamıyor.  
+Bunun sebebi, `kubectl`'in `~/.kube/config` dosyasını bulamaması veya içeriğinin doğru olmamasıdır.  
+Bu yüzden varsayılan olarak `localhost:8080` adresine gitmeye çalışıyor ve orada API server bulunamadığı için bağlantı reddediliyor.
+
+---
+
+## Çözüm
+
+Master node’da aşağıdaki komutları çalıştırarak `admin.conf` dosyasını kullanıcı dizinine kopyalayıp, izinleri ayarlayın:
+
+```bash
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Ardından tekrar deneyin:
+kubectl get nodes
