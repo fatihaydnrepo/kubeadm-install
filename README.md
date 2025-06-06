@@ -12,9 +12,6 @@ Eğer aşağıdaki hatayı alırsanız:
 couldn't get current server API group list: Get "http://localhost:8080/api?timeout=32s": dial tcp 127.0.0.1:8080: connect: connection refused
 The connection to the server localhost:8080 was refused - did you specify the right host or port?
 
-yaml
-Copy
-Edit
 
 ### Bu Hata Ne Anlama Geliyor?
 
@@ -27,11 +24,12 @@ Bu yüzden varsayılan olarak `localhost:8080` adresine gitmeye çalışıyor ve
 ## Çözüm
 
 Master node’da aşağıdaki komutları çalıştırarak `admin.conf` dosyasını kullanıcı dizinine kopyalayıp, izinleri ayarlayın:
+Ardından tekrar deneyin:
+kubectl get nodes
 
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-Ardından tekrar deneyin:
-kubectl get nodes
+
