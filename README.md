@@ -26,11 +26,14 @@ Bu yüzden varsayılan olarak `localhost:8080` adresine gitmeye çalışıyor ve
 Master node’da aşağıdaki komutları çalıştırarak `admin.conf` dosyasını kullanıcı dizinine kopyalayıp, izinleri ayarlayın:
 Ardından tekrar deneyin:
 kubectl get nodes
+![image](https://github.com/user-attachments/assets/34a31098-286c-47c7-9e10-1ddcdca3673f)
 
 ```bash
 mkdir -p $HOME/.kube
 sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 sudo chown $(id -u):$(id -g) $HOME/.kube/config
 
-![image](https://github.com/user-attachments/assets/304f0f2f-1d7c-42ba-bf54-c575caa2e0d6)
+```bash
+
+
 
